@@ -1,6 +1,26 @@
 import math
 """
 
+This program is used to decrypt and encrypt Vigenere cipher.
+
+Vigenere works like "Caesar Cipher" but with more steps.
+In a Caesar Cipher we choose a "key" (number) and than we "move" every letter
+by that number on the ABC i.e. plaintext = "crypto", key = 2. The cipher will be
+"etarvq".
+
+Vigenere works by making the "key" a word instead of a number.
+It "smears" the key word over the plaintext or the cipher before encrypting, attaching every letter a letter
+from the key i.e. plaintext = "Hello World", key = "WELCOME". The "smeared" cipher will be
+"WELCOMEWEL" (We ignore the spaces)
+
+After this, every letter in the plaintext is "moved" just like in "Caesar Cipher" according to the place in
+the ABC of the letter in the key in the "smeared" string i.e. "H" will move 23 places since "W" is the 23rd letter
+in the ABC and become "E" (due to rollover)
+
+Parameters:
+    string - The plaintext or the cipher
+    key - The key used to encrypt or decrypt
+    option - 1=encrypt 2=decrypt
 
 
 """
@@ -64,5 +84,5 @@ def vig(string, key, option):
 
 
 print(vig("GLJKDPVBQYMFYAKUGRWR", "enigma", 1))
-print(vig("nlazeiibljji", "luck", 1))
+print(vig("CYBER PRO IS A FUN COURSE", "enigma", 2))
 
