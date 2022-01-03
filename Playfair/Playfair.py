@@ -14,8 +14,8 @@ the matrix will look like this:
 (V W X Y Z)
 
 Now we pair the letters in the plaintext or cipher with one another, each one with the one next to it,
-if there an odd number of letters we add an "X" to the end to pair with the last letter. If we have two of the same
-letter that will end up in a pair, we put an "X" in between them to avoid them pairing.
+If we have two of the same letter that will end up in a pair, we put an "X" in between them to avoid them pairing.
+if there an odd number of letters we add an "X" to the end to pair with the last letter.
 
 Now we can start encoding or decoding.
 
@@ -206,5 +206,4 @@ def playfair(string, key, option):
         return returned_string
 
 
-print(playfair("AAXASDXX","CLAP",2))
-# print(playfair("BMASAXXS","CLAP", 1))
+print(playfair("THISCOURSEISABOUTCONFIDENTIALITY","DETERIORATION",1))
