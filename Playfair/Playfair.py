@@ -2,8 +2,37 @@
 """
 This program can encrypt and decrypt text via the "playfair" cipher.
 
+The method takes a string that contains either plaintext or cipher, a key and an option to encode or decode.
 
+We use the key and, without repeating letters, we write it as a 5x5 matrix and complete the rest of the spaces
+with the rest of the ABC, excluding "J" (if "J" is a part of the key we replace it with "I"). I.e. key = Repeater
+the matrix will look like this:
+(R E P A T)
+(B C D F G)
+(H I K L M)
+(N O Q S U)
+(V W X Y Z)
 
+Now we pair the letters in the plaintext or cipher with one another, each one with the one next to it,
+if there an odd number of letters we add an "X" to the end to pair with the last letter. If we have two of the same
+letter that will end up in a pair, we put an "X" in between them to avoid them pairing.
+
+Now we can start encoding or decoding.
+
+Encoding works like this:
+We take each pair and check their place in relation to one another.
+1)If they are in the same column, we replace each letter in the pair with the one below it in the matrix (in a cyclic manner)
+2)If they are in the same row, we replace each letter in the pair with the one right to it in the matrix (in a cyclic manner)
+3) if they are in a different row and column, we create a square between them as such that they will be at opposite ends
+of the square: i.e. pair = QG so the square will look like this: (D F G) then, we swap the letters with their opposites
+in the same row, I.e. G for D and Q for U.                       (K L M)
+                                                                 (Q S U)
+Decoding the just the reverse process.
+
+Parameters:
+    string - plaintext or cipher
+    key - the "password" to build the matrix with
+    option - 1=encode 2=decode
 """
 def playfair(string, key, option):
     key_normal = ""
@@ -36,6 +65,7 @@ def playfair(string, key, option):
     for i in key:  # Removes all duplicate letters from the key
         if i not in key_normal:
             key_normal += i
+    key_normal = key_normal.replace("J", "I")  # In case we have a "J" we need to replace it with an "I"
 
     m = [[],
          [],
@@ -128,7 +158,7 @@ def playfair(string, key, option):
                     if m[i].index(string[a]) - 1 < 0:  # Cyclic motion
                         returned_string += m[i][4]  # Concatenates the first letter in the row
                     else:
-                        returned_string += m[i][m[i].index(string[a]) - 1]  # Concatenates one letter to the right
+                        returned_string += m[i][m[i].index(string[a]) - 1]  # Concatenates one letter to the left
 
                     if m[i].index(string[a + 1]) - 1 < 0:  # Cyclic motion
                         returned_string += m[i][4]
@@ -156,7 +186,7 @@ def playfair(string, key, option):
                 if row_1 - 1 < 0:  # Cyclic motion
                     returned_string += m[4][m[row_1].index(string[a])]  # Concatenates same index(column) but in the last row
                 else:
-                    returned_string += m[row_1 - 1][m[row_1].index(string[a])]  # Concatenates 1 row down, same index(column)
+                    returned_string += m[row_1 - 1][m[row_1].index(string[a])]  # Concatenates 1 row up, same index(column)
 
                 if row_2 - 1 < 0:
                     returned_string += m[4][m[row_2].index(string[a + 1])]
