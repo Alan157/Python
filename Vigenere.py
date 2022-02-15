@@ -32,11 +32,11 @@ def vig(string, key, option):
     count = 0
     string = string.upper()
     key = key.upper()
-    while i < (math.ceil(float(len(string)) / float(len(key)))):
+    while i < (math.ceil(float(len(string)) / float(len(key)))):  # This loop is used to create the "smeared" string, checks how many times the key fits into the plaintext/cipher and concatenates it to a new string
         key_ext += key
         i += 1
         
-    if len(string) < len(key_ext):
+    if len(string) < len(key_ext):  # Slices the new string to remove excess letters
         # j = len(key_ext) % len(string)
         # length = len(key_ext) - j
         key_ext = key_ext[:len(string)]
