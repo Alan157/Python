@@ -27,7 +27,7 @@ We take each pair and check their place in relation to one another.
 of the square: i.e. pair = QG so the square will look like this: (D F G) then, we swap the letters with their opposites
 in the same row, I.e. G for D and Q for U.                       (K L M)
                                                                  (Q S U)
-Decoding the just the reverse process.
+Decoding is just the reverse process.
 
 Parameters:
     string - plaintext or cipher
